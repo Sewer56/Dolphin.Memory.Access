@@ -5,6 +5,7 @@
 	<strong>A handy tool for accessing emulator memory from C#<br/></strong>
 	<a href="https://www.nuget.org/packages/Dolphin.Memory.Access">
 		<img src="https://img.shields.io/nuget/v/Dolphin.Memory.Access.svg" alt="NuGet" />
+	<a/>
 </div>
 
 # About This Project
