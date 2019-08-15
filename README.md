@@ -3,6 +3,8 @@
 	<img src="https://i.imgur.com/Y0ohMsN.png" width="250" align="center" />
 	<br/> <br/>
 	<strong>A handy tool for accessing emulator memory from C#<br/></strong>
+	<a href="https://www.nuget.org/packages/Dolphin.Memory.Access">
+		<img src="https://img.shields.io/nuget/v/Dolphin.Memory.Access.svg" alt="NuGet" />
 </div>
 
 # About This Project
