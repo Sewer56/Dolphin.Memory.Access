@@ -32,7 +32,7 @@ Or more conveniently, get the real address of a variable in emulated memory:
 ```csharp
 // Operation fails if no game is currently running.
 // 0x805EF958: Current stage ID in NTSC US Shadow The Hedgehog (GUPE8P)
-if (_dolphin.TryGetAddress(0x805EF958, out IntPtr initialBaseAddress)) 
+if (_dolphin.TryGetAddress(0x805EF958, out IntPtr variableAddress)) 
 {
 	// Do things with memory.
 }
