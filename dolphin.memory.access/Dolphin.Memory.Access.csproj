@@ -8,6 +8,10 @@
     <PackageProjectUrl>https://github.com/Sewer56/Dolphin.Memory.Access</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Sewer56/Dolphin.Memory.Access</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+  
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
