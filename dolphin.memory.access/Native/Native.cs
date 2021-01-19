@@ -350,8 +350,11 @@ namespace Dolphin.Memory.Access.Native
         [StructLayout(LayoutKind.Sequential)]
         public struct PSAPI_WORKING_SET_EX_BLOCK
         {
-            public ulong Flags;
-            public ulong Invalid;
+            /// <summary>The working set information.</summary>
+            public UIntPtr Flags;
+
+            /// <summary>If <see langword="true"/>, the page is valid; otherwise, the page is not valid.</summary>
+            public bool Valid => ((long) Flags & 0b1) == 1;
         }
     }
 }

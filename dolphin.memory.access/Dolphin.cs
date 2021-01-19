@@ -144,16 +144,11 @@ namespace Dolphin.Memory.Access
                 var setInformation = new Native.Native.PSAPI_WORKING_SET_EX_INFORMATION[1];
                 setInformation[0].VirtualAddress = memoryPage.BaseAddress;
 
-                bool ok = Native.Native.QueryWorkingSetEx(_process.Handle, setInformation, sizeof(Native.Native.PSAPI_WORKING_SET_EX_INFORMATION) * setInformation.Length);
-
-                if (!ok)
+                if (!Native.Native.QueryWorkingSetEx(_process.Handle, setInformation, sizeof(Native.Native.PSAPI_WORKING_SET_EX_INFORMATION) * setInformation.Length)) 
                     return false;
-
-                // We found our address.
-                if ((setInformation[0].VirtualAttributes.Flags & 0b1) == 1)
-                {
+                
+                if (setInformation[0].VirtualAttributes.Valid)
                     return true;
-                }
             }
 
             return false;

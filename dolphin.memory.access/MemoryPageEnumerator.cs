@@ -29,8 +29,7 @@ namespace Dolphin.Memory.Access
             GetSystemInfo(out SYSTEM_INFO systemInfo);
 
             // Max address defaults to 32bit maximum. If this is a 64bit process, switch to 64bit max address.
-            if (systemInfo.wProcessorArchitecture == ProcessorArchitecture.PROCESSOR_ARCHITECTURE_AMD64 && !isWow64)
-                _maxAddress = (long)systemInfo.lpMaximumApplicationAddress;
+            _maxAddress = (long)systemInfo.lpMaximumApplicationAddress;
         }
 
         /* Interface Implementation */
@@ -45,6 +44,7 @@ namespace Dolphin.Memory.Access
             // Add the page and increment address iterator to go to next page.
             Current          = memoryInformation;
             _currentAddress += (long)memoryInformation.RegionSize;
+
             return true;
         }
 
