@@ -17,8 +17,8 @@ namespace Dolphin.Memory.Access
 
         private Process _process;
 
-        private long _currentAddress = 0;
-        private long _maxAddress     = 0x7FFFFFFF; // 32bit
+        private ulong _currentAddress = 0;
+        private ulong _maxAddress     = 0x7FFFFFFF; // 32bit
 
         /* Setup */
         public MemoryPageEnumerator(Process process)
@@ -29,7 +29,7 @@ namespace Dolphin.Memory.Access
             GetSystemInfo(out SYSTEM_INFO systemInfo);
 
             // Max address defaults to 32bit maximum. If this is a 64bit process, switch to 64bit max address.
-            _maxAddress = (long)systemInfo.lpMaximumApplicationAddress;
+            _maxAddress = (ulong) systemInfo.lpMaximumApplicationAddress;
         }
 
         /* Interface Implementation */
@@ -43,7 +43,7 @@ namespace Dolphin.Memory.Access
 
             // Add the page and increment address iterator to go to next page.
             Current          = memoryInformation;
-            _currentAddress += (long)memoryInformation.RegionSize;
+            _currentAddress += (ulong) memoryInformation.RegionSize;
 
             return true;
         }
