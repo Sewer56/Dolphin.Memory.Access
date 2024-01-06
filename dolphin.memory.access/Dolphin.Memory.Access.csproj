@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <Description>Tiny barebones library used to access the memory of Dolphin emulator on Windows.</Description>
@@ -10,6 +10,8 @@
     <RepositoryType>git</RepositoryType>
   
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	
+    <LangVersion>9.0</LangVersion>
   
     <Version>1.0.3</Version>
   </PropertyGroup>
@@ -23,7 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reloaded.Memory" Version="1.4.1" />
+    <PackageReference Include="Reloaded.Memory" Version="9.3.2" />
   </ItemGroup>
 
   <ItemGroup>

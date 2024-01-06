@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using Reloaded.Memory.Sources;
+using Reloaded.Memory;
+using Reloaded.Memory.Interfaces;
 
 namespace Dolphin.Memory.Access
 {
@@ -16,7 +17,7 @@ namespace Dolphin.Memory.Access
         private IntPtr  _dolphinBaseAddress;
         private int     _dolphinModuleSize;
 
-        private IMemory _memory;
+        private ICanReadWriteMemory _memory;
         private Process _process;
 
         /* Construction / Destruction */
@@ -33,7 +34,7 @@ namespace Dolphin.Memory.Access
             _dolphinModuleSize  = mainModule.ModuleMemorySize;
 
             if (_process.Id == Process.GetCurrentProcess().Id)
-                _memory = new Reloaded.Memory.Sources.Memory();
+                _memory = new Reloaded.Memory.Memory();
             else
                 _memory = new ExternalMemory(_process);
         }
@@ -64,14 +65,16 @@ namespace Dolphin.Memory.Access
             // Check cached page address for potential valid page.
             if (_pointerToEmulatedMemory != IntPtr.Zero)
             {
-                _memory.Read(_pointerToEmulatedMemory, out emulatedBaseAddress);
+                _memory.Read((nuint)_pointerToEmulatedMemory.ToInt64(), out emulatedBaseAddress);
                 return emulatedBaseAddress != IntPtr.Zero; // If it's zero, a game is not running.
             }
 
             if (TryGetDolphinPage(out emulatedBaseAddress))
             {
+                Span<byte> dolphinMainModule = new byte[_dolphinModuleSize];
+
                 // Find pointer to emulated memory.
-                _memory.ReadRaw(_dolphinBaseAddress, out byte[] dolphinMainModule, _dolphinModuleSize);
+                _memory.ReadRaw((nuint)_dolphinBaseAddress.ToInt64(), dolphinMainModule);
                 long readCount = _dolphinModuleSize - sizeof(IntPtr);
 
                 fixed (byte* mainModulePtr = dolphinMainModule)
